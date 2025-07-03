@@ -34,4 +34,12 @@ public class AccountProcessorTest {
         Account updatedAcc = [SELECT Id, Number_Of_Contacts__c FROM Account WHERE Id = :acc.Id];
         System.assertEquals(0, updatedAcc.Number_Of_Contacts__c, 'The Number Of Contacts should be 0.');
     }
+    @IsTest
+    static void testCountContactsWithNoContactsInput() {
+
+        Test.startTest();
+        AccountProcessor.countContacts(null);         
+        AccountProcessor.countContacts(new List<Id>());
+        Test.stopTest();
+    }
 }
